@@ -42,7 +42,7 @@ Puppet::Type.type(:cloud_file).provide(:s3, :parent => Puppet::Provider::CloudFi
 
   def write(data)
     begin
-      f = File.open(resource[:path], 'w')
+      f = File.open(resource[:path], 'w', '0444')
     rescue Errno::ENOENT => detail
       raise Puppet::Error, detail.message
     rescue => detail

@@ -46,7 +46,7 @@ Puppet::Type.type(:cloud_file).provide(:s3, :parent => Puppet::Provider::CloudFi
     rescue Errno::ENOENT => detail
       raise Puppet::Error, detail.message
     rescue => detail
-      p detail
+      raise Puppet::Error, "Unknown Error in write (#{{detail}})"
     end
 
     f.write(data)
@@ -67,7 +67,7 @@ Puppet::Type.type(:cloud_file).provide(:s3, :parent => Puppet::Provider::CloudFi
     rescue Aws::S3::Errors::AccessDenied
       raise Puppet::Error, "Access Denied to S3 file"
     rescue => detail
-      p detail
+      raise Puppet::Error, "Unknown Error in S3 read (#{detail})"
     end
   end
 end

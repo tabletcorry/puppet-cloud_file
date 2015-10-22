@@ -46,7 +46,7 @@ Puppet::Type.type(:cloud_file).provide(:s3, :parent => Puppet::Provider::CloudFi
     rescue Errno::ENOENT => detail
       raise Puppet::Error, detail.message
     rescue => detail
-      raise Puppet::Error, "Unknown Error in write (#{{detail}})"
+      raise Puppet::Error, "Unknown Error in write (#{detail})"
     end
 
     f.write(data)
